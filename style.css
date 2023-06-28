@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+h1 {
+    color: blue;
+}
+
+#wrapper {
+    align-items: center;
+    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+}
+
+form {
+    background-color: rgba(85,54,54,1);
+    border: 3px solid rgba(177,142,142,1);
+    border-radius: 20px;
+    padding: 20px;
+    width: 60%;
+}
+
+h2 {
+    color: #ccc;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+input {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 95%;
+}
+
+label {
+    color: #888;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.box_button {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    align-self: center;
+    background-color: rgba(35,174,202,1);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    margin-right: 10px;
+    margin-top: 30px;
+    padding: 10px 15px;
+}
+
+button:hover {
+    background-color: #fff;
+    color: rgba(35,174,202,1);
+    cursor: pointer;
+}
+
+.sub_text {
+    color: #ccc;
+    margin-top: 20px;
+}
+
+.link {
+    background-color: inherit;
+    color: rgba(35,174,202,1);
+    text-decoration: none;
+}
+
+.link:hover {
+    color: rgba(35,174,202,1);
+    text-decoration: underline;
+}
+
+.error {
+    background-color: #f2dede;
+    color: blue;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px auto;
+    font-weight: bold;
+}
+
+/* -- NAVBAR -- */
+#navbar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(85,54,54,1);
+    padding: 10px;
+}
+
+.navbar-header {
+    display: flex;
+}
+
+.navbar-header > * {
+    color: #ccc;
+    padding: 10px;
+}
+
+#navbar a {
+    padding: 10px;
+    text-decoration: none;
+    color: rgba(85,54,54,1);
+    background-color: #ccc;
+    border: 1px solid #ccc;
+}
+
+#navbar a:hover {
+    background-color: rgba(85,54,54,1);
+    color: #ccc;
+}
+
+.navbar-link {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
