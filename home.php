@@ -1,16 +1,22 @@
-<?php require_once './template/_header.php' ?>
-<?php require_once './template/_navbar.php' ?>
-<?php session_start();
+<?php require_once './template/_header.php';
+require_once './template/_navbar.php';
+require_once './template/_card.php';
 
-// on vérifie si une session existe
-if (!isset($_SESSION['email'])) {
-    // si non, on redirige vers home
-    header("Location: ./home.php");
-    exit();
-}
 
+// On importe la config
+require_once './api/config.php';
+
+// On importe le fichier get_post.php
+require_once './api/get_post.php';
 ?>
 
-<h1>HELLO HOME <?php echo $_SESSION['email'] ?> </h1>
+<main class="d-flex flex-column align-items-center">
+    <h1>Tous mes posts</h1>
+    <div class="d-flex col-10 flex-wrap justify-content-center">
+        <?php
+        get_my_posts($_SESSION['id']);
+        ?>
+    </div>
+</main>
 
 <?php require_once './template/_footer.php' ?>

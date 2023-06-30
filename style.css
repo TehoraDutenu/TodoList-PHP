@@ -5,9 +5,6 @@
     font-family: cursive;
 }
 
-h1 {
-    color: blue;
-}
 
 #wrapper {
     align-items: center;
@@ -19,11 +16,17 @@ h1 {
 }
 
 form {
-    background-color: rgba(85,54,54,1);
+    background-color: rgb(146, 93, 93);
     border: 3px solid rgba(177,142,142,1);
     border-radius: 20px;
     padding: 20px;
     width: 60%;
+}
+
+h1 {
+    text-align: center;
+    color: rgb(146, 93, 93);
+    margin: 10px;
 }
 
 h2 {
@@ -42,7 +45,7 @@ input {
 }
 
 label {
-    color: #888;
+    color: rgb(146, 93, 93);
     font-size: 18px;
     padding: 10px;
 }
@@ -88,7 +91,7 @@ button:hover {
 
 .error {
     background-color: #f2dede;
-    color: blue;
+    color: rgba(85,54,54,1);
     padding: 10px;
     width: 95%;
     border-radius: 5px;
@@ -131,4 +134,39 @@ button:hover {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+
+
+/* -- POST -- */
+.card_title {
+    color: rgb(146, 93, 93);
+    font-weight: bold;
+}
+
+.text_card {
+    color: blueS;
+}
+
+.post_delete{
+    color: rgba(255, 0, 0, 1);
+}
+.post_delete :hover{
+    color: rgba(255, 0, 0, 1);
+    cursor: pointer;
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
+
+
+.post_update{
+    color: rgba(218, 165, 32, 1);
+}
+.post_update :hover{
+    color: rgba(218, 165, 32, 1);
+    cursor: pointer;
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
 }

@@ -1,62 +1,75 @@
 <?php
-
-// on require la config
+// On require la config
 require_once './config.php';
+require_once '../tools/function.php';
 
-var_dump($_POST);
-
-// on vérifie que l'on reçoit bien les données du formulaire
+// 1- On vérifie que l'on reçoit bien les données du formulaire
 if (isset($_POST['email']) && isset($_POST['password'])) {
-    // on crée une fonction qui va sécuriser les données reçues
-    function validate($data)
-    {
-        $data1 = trim($data); // supprime les espaces avant ou après la saisie
-        $data2 = stripslashes($data1); // supprime les antislashs
-        $data3 = htmlspecialchars($data2); // convertit les caractères spéciaux en string
-        return $data3;
-    }
+    // 2- On crée une fonction qui va sécuriser les données reçues
 
-    // on crée nos variables qui vont contenir les données sécurisées
+
+    // 3- On crée nos variables qui vont contenir les données sécurisées
     $email = strtolower(validate($_POST['email']));
     $password = validate($_POST['password']);
 
-    // maintenant que nos données sont récupérées et sécurisées
-    // on va effectuer plusieurs traitements
-    // gestion des erreurs 
-    // on vérifie que le champ email est rempli
+    // Maintenant que nos données sont réceptionnées et sécurisées
+    // On va effectuer plusieurs traitements
+    // 4- Gestion des erreurs
+    // On vérifie que l'email est rempli
     if (empty($email)) {
-        // on renvoie en GET à index.php le paramètre "?error:veuillez saisir l'email"
-        header("Location:../login.php?error=Veuillez saisir l'email");
+        // On revoie en GET à index.php le paramètre ?error=Veuillez saisir l'email"
+        header("Location: ../login.php?error=Veuillez saisir l'email");
         exit();
     } else if (empty($password)) {
+        // On revoie en GET à index.php le paramètre ?error=Veuillez saisir le mot de passe"
         header("Location: ../login.php?error=Veuillez saisir le mot de passe");
         exit();
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../login.php?error=Veuillez saisir un email valide");
+        // On revoie en GET à index.php le paramètre ?error=Veuillez saisir un email valide"
+        header("Location: ../login.php?error=Veuillez saisir un mail valide");
         exit();
     } else {
-        // on va vérifier que l'utilisateur existe bien dans la BDD
+        // On va vérifier que l'utilisateur existe bien dans la BDD
         global $mysqli;
-        // on crée la requête sql
+
+        // On crée la requete sql
         $query = "SELECT * FROM user WHERE email = '$email'";
-        // on exécute la requête
+
+        // On execute la requete
         if ($result = mysqli_query($mysqli, $query)) {
-            // on regarde si on a un résultat
+            // On regarde si on a un résultat qui sort
+
             if (mysqli_num_rows($result) < 1) {
-                header("Location: ../login.php?erro=Email ou mot de passe incorrect");
+
+                // On ferme la connexion
+                mysqli_close($mysqli);
+
+                // On redirige
+                header("Location: ../login.php?error=Email et/ou mot de passe incorrect");
                 exit();
             }
-            // si on a un résultat on vérifie le combo email / mot de passe
+            // Si on a un résultat on vérifier le combo email / mot de passe
             while ($user = mysqli_fetch_assoc($result)) {
-                if ($user['email'] == $email && password_verify($password, $user['password'])) {
-                    // on crée la session
+                if ($user['email'] === $email && password_verify($password, $user['password'])) {
+                    // On peux créer la session
                     session_start();
+
+                    // On va stocker l'email et l'id de l'utilisateur dans la session
                     $_SESSION['email'] = $user['email'];
                     $_SESSION['id'] = $user['id'];
-                    // on redirige vers la page home
+
+                    // On ferme la connexion
+                    mysqli_close($mysqli);
+
+                    // On redirige sur la page home.php
                     header("Location: ../home.php");
                 } else {
-                    header("Location: ../login.php?erro=Email ou mot de passe incorrect");
+
+                    // On ferme la connexion
+                    mysqli_close($mysqli);
+
+                    // On redirige
+                    header("Location: ../login.php?error=Email et/ou mot de passe incorrect");
                     exit();
                 }
             }
